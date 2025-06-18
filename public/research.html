@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="iconImage.png" />
+    <title>Research Title Generator</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/research.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-user-graduate"></i> Research Title Generator</h1>
+            <p class="subtitle">Get tailored advice for your course-specific research topics</p>
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i> Powered by LLM
+            </div>
+            <div class="ai-badge" id="changeTopicBtn" role="button" tabindex="0">
+                <i class="fa fa-arrow-left"></i> Home
+            </div>
+            <div class="user-tip">
+                <i class="fa fa-exclamation"></i>&nbsp;Click "Home" button to generate title for BSCS and BS InfoTech
+                courses.
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="form-section card">
+                <h2><i class="fas fa-book"></i> Research Info</h2>
+
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <input type="text" id="course" placeholder="e.g., BS Criminology, BSHM, BS Engineering" />
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Specific Research Topic</label>
+                    <textarea id="topic" rows="3"
+                        placeholder="e.g., General Description, Idea, Concept of the study"></textarea>
+                </div>
+
+                <button id="adviseBtn" class="btn">
+                    <i class="fas fa-lightbulb"></i> Generate Title
+                </button>
+            </div>
+
+            <div class="results-section card">
+                <h2><i class="fas fa-comments"></i>Generated Titles</h2>
+
+                <div class="results-container">
+                    <div class="results-placeholder" id="resultsPlaceholder">
+                        <i class="fas fa-star" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <h3>Your AI-generated titles will appear here</h3>
+                        <p>Enter course and topic, then click "Generate Title"</p>
+                    </div>
+
+                    <div class="results-content" id="resultsContent" style="display: none;"></div>
+
+                    <div class="loading" id="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Analyzing your topic and preparing advice</p>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">Please wait 10-30 seconds</p>
+                    </div>
+
+                    <div class="error-box" id="errorBox" style="display: none;">
+                        <div class="error-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="error-title">Request Timeout</div>
+                        <p>The API request took too long to complete. Please try again.</p>
+                        <div class="error-details">
+                            <p><strong>Error:</strong> ECONNABORTED - timeout exceeded</p>
+                            <p><strong>Possible Solutions:</strong></p>
+                            <ul>
+                                <li>Check your internet connection</li>
+                                <li>Simplify your topic</li>
+                                <li>Try again later</li>
+                            </ul>
+                        </div>
+                        <div class="error-actions">
+                            <button class="error-btn retry-btn" id="retryBtn"><i class="fas fa-redo"></i> Retry</button>
+                            <button class="error-btn cancel-btn" id="cancelBtn"><i class="fas fa-times"></i>
+                                Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>@ 2025 Jerwin Gubat | Created for Computer Science and IT Students</p>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="iconImage.png">
+    <title>Research Title Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> Research Title Generator</h1>
+            <p class="subtitle">Generate creative and relevant project titles for Computer Science and Information
+                Technology students</p>
+            <div class="ai-badge">
+                <i class="fas fa-robot"></i> Powered by LLM
+            </div>
+            <div class="ai-badge" id = "changeTopicBtn">
+                <i class="fa fa-arrow-right"></i> Other Topics
+            </div>
+            <div class="user-tip">
+                <i class="fa fa-exclamation"></i>&nbsp;Click "Other Topics" button to generate title for other courses.
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="form-section card">
+                <h2><i class="fas fa-edit"></i> Project Details</h2>
+                <div class="form-group">
+                    <label>Project Type</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="projectCategory" value="Thesis/Computer Science" checked>
+                            <span class="radio-label">Thesis</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="projectCategory" value="Capstone/Information Technology">
+                            <span class="radio-label">Capstone</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry / Field of Study</label>
+                    <input type="text" id="industry" placeholder="e.g., Healthcare, Education, Finance, E-commerce"
+                        value="Healthcare">
+                </div>
+
+                <div class="form-group">
+                    <label for="projectType">Type of Project</label>
+                    <select id="projectType">
+                        <option value="Website">Website / Web Application</option>
+                        <option value="Desktop">Desktop Application</option>
+                        <option value="Mobile App" selected>Mobile Application</option>
+                        <option value="AI/ML">Artificial Intelligence / Machine Learning</option>
+                        <option value="IoT">Internet of Things (IoT)</option>
+                        <option value="Data Science">Data Science / Analytics</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Cloud Computing">Cloud Computing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="technology">Technology Stack / Languages</label>
+                    <input type="text" id="technology" placeholder="e.g., Python, React, TensorFlow, AWS">
+                </div>
+
+                <div class="form-group">
+                    <label for="specialRequirements">Special Requirements (Optional)</label>
+                    <textarea id="specialRequirements" rows="3"
+                        placeholder="e.g., Must use blockchain, Should include AI component, Needs to be accessible for visually impaired users"></textarea>
+                </div>
+
+                <button id="generateBtn" class="btn">
+                    <i class="fas fa-magic"></i> Generate Titles
+                </button>
+            </div>
+
+            <div class="results-section card">
+                <h2><i class="fas fa-lightbulb"></i> Generated Titles</h2>
+
+                <div class="results-container">
+                    <div class="results-placeholder" id="resultsPlaceholder">
+                        <i class="fas fa-star" style="font-size: 3rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <h3>Your AI-generated titles will appear here</h3>
+                        <p>Fill in your project details and click "Generate Titles"</p>
+                    </div>
+
+                    <div class="results-content" id="resultsContent" style="display: none;">
+                    </div>
+
+                    <div class="loading" id="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>The AI Agent is generating creative titles for you...</p>
+                        <p style="font-size: 0.9rem; opacity: 0.7;">This usually takes 10-30 seconds</p>
+                    </div>
+
+                    <div class="error-box" id="errorBox" style="display: none;">
+                        <div class="error-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="error-title">Request Timeout</div>
+                        <p>The API request took too long to complete. Please try again.</p>
+
+                        <div class="error-details">
+                            <p><strong>Error:</strong> ECONNABORTED - timeout exceeded</p>
+                            <p><strong>Message:</strong> The request took longer than expected to complete.</p>
+                            <p><strong>Possible Solutions:</strong>
+                            <ul>
+                                <li>Check your internet connection</li>
+                                <li>Simplify your request details</li>
+                                <li>Try again in a few minutes</li>
+                            </ul>
+                            </p>
+                        </div>
+
+                        <div class="error-actions">
+                            <button class="error-btn retry-btn" id="retryBtn">
+                                <i class="fas fa-redo"></i> Retry
+                            </button>
+                            <button class="error-btn cancel-btn" id="cancelBtn">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="examples">
+            <h2><i class="fas fa-graduation-cap"></i> Example Project Titles</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-title">Intelligent Healthcare Management System: A Web-Based Platform for
+                        Patient Monitoring and Appointment Scheduling</div>
+                    <div class="example-details">
+                        <div class="example-detail"><i class="fas fa-industry"></i> <strong>Industry:</strong>
+                            Healthcare</div>
+                        <div class="example-detail"><i class="fas fa-laptop-code"></i> <strong>Project Type:</strong>
+                            Website</div>
+                        <div class="example-detail"><i class="fas fa-microchip"></i> <strong>Technology:</strong> React,
+                            Node.js, MongoDB</div>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Mobile Learning Companion: An Android Application for Personalized
+                        Education Using AI Algorithms</div>
+                    <div class="example-details">
+                        <div class="example-detail"><i class="fas fa-industry"></i> <strong>Industry:</strong> Education
+                        </div>
+                        <div class="example-detail"><i class="fas fa-mobile-alt"></i> <strong>Project Type:</strong>
+                            Mobile App</div>
+                        <div class="example-detail"><i class="fas fa-microchip"></i> <strong>Technology:</strong> Java,
+                            TensorFlow Lite</div>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="example-title">Secure Financial Analytics Dashboard: A Desktop Application for Real-time
+                        Market Data Visualization</div>
+                    <div class="example-details">
+                        <div class="example-detail"><i class="fas fa-industry"></i> <strong>Industry:</strong> Finance
+                        </div>
+                        <div class="example-detail"><i class="fas fa-desktop"></i> <strong>Project Type:</strong>
+                            Desktop</div>
+                        <div class="example-detail"><i class="fas fa-microchip"></i> <strong>Technology:</strong>
+                            Python, PyQt, PostgreSQL</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>@ 2025 Jerwin Gubat | Created for Computer Science and Information Technology Students</p>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
