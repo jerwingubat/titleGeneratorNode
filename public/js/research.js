@@ -140,7 +140,6 @@ function showError(message) {
     errorBox.style.display = 'block';
 }
 
-// Add event listeners
 document.addEventListener('DOMContentLoaded', function () {
     const generateBtn = document.getElementById('adviseBtn') || document.getElementById('generateBtn');
     const retryBtn = document.getElementById('retryBtn');
