@@ -11,16 +11,6 @@ async function generateTitles() {
         topic: document.getElementById('topic').value.trim()
     };
 
-    // For research.html, you might use:
-    // const inputs = {
-    //     industry: document.getElementById('industry').value.trim(),
-    //     technology: document.getElementById('technology').value.trim(),
-    //     specialRequirements: document.getElementById('specialRequirements').value.trim(),
-    //     projectCategory: document.querySelector('input[name="projectCategory"]:checked').value,
-    //     projectType: document.getElementById('projectType').value
-    // };
-
-    // Get DOM elements
     const generateBtn = document.getElementById('adviseBtn') || document.getElementById('generateBtn');
     const resultsPlaceholder = document.getElementById('resultsPlaceholder');
     const resultsContent = document.getElementById('resultsContent');
